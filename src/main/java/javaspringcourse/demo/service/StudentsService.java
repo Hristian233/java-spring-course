@@ -4,6 +4,7 @@ import javaspringcourse.demo.model.Student;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -13,9 +14,9 @@ public class StudentsService {
     private static int idCounter = 0;
 
     static {
-        students.add(new Student("Ivan", "Ivanov", idCounter++ ));
-        students.add(new Student("Petar", "Petrov", idCounter++ ));
-        students.add(new Student("Ivan", "Ivanov", idCounter++));
+        students.add(new Student("Ivan", "Ivanov", idCounter++, new Date() ));
+        students.add(new Student("Petar", "Petrov", idCounter++, new Date() ));
+        students.add(new Student("Ivan", "Ivanov", idCounter++, new Date()));
     }
 
     public List<Student> findAll() { return students; }
