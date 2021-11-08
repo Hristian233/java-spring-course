@@ -10,6 +10,7 @@ import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -50,14 +51,13 @@ public class StudentsController {
     }
 
     @PostMapping("/students")
-    public ResponseEntity<Object> createStudent(@Valid @RequestBody Student student){
+    public String createStudent(@Valid @RequestBody Student student){
         Student savedStudent = studentsService.save(student);
 
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(savedStudent.getId()).toUri();
+        if(savedStudent != null){
+            return "Success";
+        }
 
-        return ResponseEntity.created(location).build();
+        return null;
     }
 }
